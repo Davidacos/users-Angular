@@ -1,27 +1,139 @@
-# Users
+# Documentación del Proyecto Full Stack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+Este proyecto es un microservicio desarrollado con **Node.js** y **Express**, junto con un frontend construido en **Angular**. Utiliza **PostgreSQL** como base de datos y **pg** como cliente de conexión a la base de datos. A continuación, se explican los pasos para ejecutar tanto el backend como el frontend de manera local, además de los detalles necesarios para probar y entender el funcionamiento del sistema.
 
-## Development server
+## Requisitos Previos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Tener instalados:
+   - **Node.js** (v18 o superior)
+   - **npm** o **yarn**
+   - **Angular CLI** (v18)
+   - **PostgreSQL** (v12 o superior)
+2. Contar con herramientas como **Postman** para pruebas o un navegador para interactuar con el frontend.
+3. Tener configurado **Git** para clonar los repositorios.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Clonar el Repositorio
 
-## Build
+Clona los repositorios desde GitHub:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+# Clonar el backend
+git clone https://github.com/Davidacos/Prueba-Tecnica.git
 
-## Running unit tests
+# Clonar el frontend
+git clone https://github.com/Davidacos/users-Angular.git
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Configuración y Ejecución del Backend
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Navega a la carpeta del backend:
 
-## Further help
+   ```bash
+   cd prueba-tecnica
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Configura la base de datos:
+   - Asegúrate de que PostgreSQL esté en funcionamiento.
+   - En la carpeta `database`, hay un archivo `db.sql` que contiene la estructura de la tabla `usuarios`. Ejecuta este archivo en tu instancia de PostgreSQL. Puedes usar herramientas como **pgAdmin** o desde la terminal:
+  Esto depende de como tenga configurado el usuario y la contraseña ya que es en un entorno local, para realizar la configuracion en el archivo .env se encuentra la configuracion de la base de datos, alli se debe configurar segun el entorno local    
+
+ .env:
+  DB_USER=postgres
+  DB_HOST=localhost
+  DB_PASSWORD=admin
+  DB_DATABASE=microservicio
+  DB_PORT=5432    
+
+     ```bash
+     psql -U <USUARIO> -d <NOMBRE_BASE_DE_DATOS> -f database/db.sql
+     ```
+
+4. Configura el archivo `.env` en el backend con los detalles de tu base de datos (basado en `example.env` si está disponible).
+
+5. Ejecuta el servidor:
+
+   ```bash
+   npm start
+   ```
+
+6. El backend estará disponible en `http://localhost:3000`.
+
+---
+
+## Configuración y Ejecución del Frontend
+
+1. Navega a la carpeta del frontend:
+
+   ```bash
+   cd users-angular
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Configura el archivo `environment.ts` dentro de la carpeta `src/environments` con la URL del backend, por ejemplo:
+
+   ```typescript
+   export const environment = {
+     production: false,
+     apiUrl: 'http://localhost:3000/'
+   };
+   ```
+
+4. Ejecuta la aplicación:
+
+   ```bash
+   ng serve
+   ```
+
+5. El frontend estará disponible en `http://localhost:4200`.
+
+---
+
+## Pruebas del Microservicio
+
+### 1. **Desde Postman**
+
+- **URL Base:** `http://localhost:3000/api/`
+- Endpoints:
+  - **GET /data:** Retorna la lista de usuarios.
+      {
+        "id": "3"
+        "nombre": "Juan",
+        "correo": "juan@example.com",
+        "edad": "24"
+      }
+      ```
+
+### 2. **Desde el Frontend**
+
+- Navega a `http://localhost:4200`.
+- Visualiza la tabla de usuarios que consume el microservicio.
+- Realiza operaciones según las funcionalidades disponibles (listar, agregar, etc.).
+
+---
+
+
+
+## Notas Adicionales
+
+- Asegúrate de que los puertos `3000` (backend) y `4200` (frontend) estén libres.
+- Si tienes problemas de conexión con la base de datos, revisa las configuraciones del archivo `.env` y la disponibilidad de tu servidor PostgreSQL.
+
+---
+
+¡Gracias por utilizar este proyecto! Si tienes preguntas, no dudes en consultarme.
+
