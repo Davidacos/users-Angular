@@ -1,0 +1,23 @@
+<div class="container">
+    <h1 class="text-center">Users</h1>
+    <table class="table table-hover">
+        <thead class="table-danger">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of usersList; track $index) {
+                <tr>
+                    <th scope="row">{{item.id}}</th>
+                    <th>{{item.nombre}}</th>
+                    <th>{{item.correo}}</th>
+                    <th>{{item.edad}}</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
